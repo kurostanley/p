@@ -5,16 +5,76 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Harmonic Gambit: Chess-Driven Generative Music</title>
 	<link rel="stylesheet" href="styles.css">
-	
-	<!-- External Libraries - CSS -->
-	<link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+	<style>
+		/* Language switching styles */
+		.lang-switcher {
+			position: fixed;
+			top: 100px;
+			right: 30px;
+			z-index: 1000;
+			background: rgba(255, 255, 255, 0.95);
+			padding: 8px 12px;
+			border-radius: 20px;
+			box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+			backdrop-filter: blur(10px);
+		}
+		
+		.lang-switcher button {
+			background: none;
+			border: none;
+			font-size: 14px;
+			cursor: pointer;
+			padding: 6px 12px;
+			margin: 0 3px;
+			border-radius: 15px;
+			transition: all 0.3s;
+			font-weight: 500;
+		}
+		
+		.lang-switcher button:hover {
+			background: rgba(52, 152, 219, 0.1);
+			transform: translateY(-1px);
+		}
+		
+		.lang-switcher button.active {
+			background: #3498db;
+			color: white;
+			font-weight: bold;
+			box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+		}
+		
+		/* Hide inactive language content */
+		body.lang-zh .lang-en { display: none; }
+		body.lang-en .lang-zh { display: none; }
+		
+		/* Responsive adjustment for smaller screens */
+		@media (max-width: 768px) {
+			.lang-switcher {
+				top: 10px;
+				right: 10px;
+				padding: 6px 10px;
+			}
+			
+			.lang-switcher button {
+				font-size: 12px;
+				padding: 4px 8px;
+			}
+		}
+	</style>
 </head>
-<body>
+<body class="lang-zh">
+	<!-- Language Switcher -->
+	<div class="lang-switcher">
+		<button onclick="switchLanguage('zh')" class="lang-btn active" id="btn-zh">中文</button>
+		<button onclick="switchLanguage('en')" class="lang-btn" id="btn-en">English</button>
+	</div>
+
 	<div class="container">
 		<!-- Header -->
 		<header>
 			<h1>Harmonic Gambit: A Theoretical Framework for Chess-Driven Generative Music</h1>
-			<p class="subtitle">諧律博弈：西洋棋局作為生成式音樂的理論框架與實證分析</p>
+			<p class="subtitle lang-zh">諧律博弈：西洋棋局作為生成式音樂的理論框架與實證分析</p>
+			<p class="subtitle lang-en">Chess-Driven Generative Music: A Theoretical Framework and Empirical Analysis</p>
 			<div class="authors">
 				<p>Research Paper</p>
 				<p class="date">January 2026</p>
@@ -23,30 +83,62 @@
 
 		<!-- Abstract -->
 		<section id="abstract">
-			<h2>Abstract</h2>
+			<h2 class="lang-zh">摘要</h2>
+			<h2 class="lang-en">Abstract</h2>
 			<div class="content">
-				<p>
-					本研究提出一個創新的演算法框架，將西洋棋局的策略博弈轉譯為結構化的生成式音樂。
-					不同於 John Cage 的 <em>Reunion</em>（1968）將棋步作為聲音觸發器，本系統深度映射棋局的內在邏輯、權力消長與心理動態至音樂參數。
-					我們建立了四層聲音角色架構（Timeline、Foundation、Groove、Lead），並設計精確的參數映射機制，
-					將事件型數據（吃子、將軍）、連續型數據（局面評估、子力差）與行為密度轉化為音樂訊號。
-				</p>
-				<p>
-					以 1972 年 Fischer vs. Spassky 世界冠軍賽第六局為案例，本研究展示系統如何捕捉「無事件性壓力」的累積過程。
-					實證分析包含：（1）41 手棋局的完整參數追蹤，（2）音樂層級活動度的量化測量，（3）局面評估與音樂張力的相關性分析。
-					結果顯示，系統能有效將抽象的棋局敘事轉化為可感知的聽覺結構，為跨域藝術生成提供可複製的理論基礎。
-				</p>
+				<div class="lang-zh">
+					<p>
+						本研究提出一個創新的演算法框架，將西洋棋局的策略博弈轉譯為結構化的生成式音樂。
+						不同於 John Cage 的 <em>Reunion</em>（1968）將棋步作為聲音觸發器，本系統深度映射棋局的內在邏輯、權力消長與心理動態至音樂參數。
+						我們建立了四層聲音角色架構（Timeline、Foundation、Groove、Lead），並設計精確的參數映射機制，
+						將事件型數據（吃子、將軍）、連續型數據（局面評估、子力差）與行為密度轉化為音樂訊號。
+					</p>
+					<p>
+						以 1956 年「世紀對局」（Byrne vs. Fischer）為案例，本研究展示系統如何處理極端的戰術事件：
+						13 歲的 Fischer 主動犧牲皇后，透過「子力差」與「局面評估」的脫鉤，創造出音樂映射的獨特挑戰。
+						實證分析包含：（1）完整棋局的參數追蹤與突變點分析，（2）Material Balance 與 Position Evaluation 的相關性解耦，
+						（3）高密度戰術事件的音樂層級活動測量。結果顯示，系統能有效將極端的棋局敘事轉化為可感知的聽覺結構，
+						為跨域藝術生成提供可複製的理論基礎。
+					</p>
+				</div>
+				<div class="lang-en">
+					<p>
+						This research proposes an innovative algorithmic framework that translates the strategic gameplay of chess into structured generative music. 
+						Unlike John Cage's <em>Reunion</em> (1968), which used chess moves as sound triggers, this system deeply maps the intrinsic logic, 
+						power dynamics, and psychological patterns of chess positions to musical parameters. We establish a four-layer sonic role hierarchy 
+						(Timeline, Foundation, Groove, Lead) and design precise parameter mapping mechanisms that convert discrete events (captures, checks), 
+						continuous values (position evaluation, material balance), and behavioral density into musical signals.
+					</p>
+					<p>
+						Using the 1956 "Game of the Century" (Byrne vs. Fischer) as a case study, this research demonstrates how the system handles extreme tactical events: 
+						13-year-old Fischer's deliberate queen sacrifice creates a unique challenge for musical mapping through the decoupling of "material balance" 
+						and "position evaluation." The empirical analysis includes: (1) complete game parameter tracking and mutation point analysis, 
+						(2) correlation decoupling between Material Balance and Position Evaluation, (3) musical layer activity measurement of high-density tactical events. 
+						Results show that the system effectively transforms extreme chess narratives into perceptible auditory structures, 
+						providing a reproducible theoretical foundation for cross-domain artistic generation.
+					</p>
+				</div>
 				<p class="keywords"><strong>Keywords:</strong> Generative Music, Algorithmic Composition, Chess Analysis, Parameter Mapping, Sonic Narrative, Procedural Art</p>
 			</div>
 		</section>
 
 		<!-- Table of Contents -->
 		<nav id="toc">
-			<h3>Table of Contents</h3>
-			<ul>
+			<h3 class="lang-zh">目錄</h3>
+			<h3 class="lang-en">Table of Contents</h3>
+			<ul class="lang-zh">
+				<li><a href="#introduction">1. 引言</a></li>
+				<li><a href="#methodology">2. 研究方法</a></li>
+				<li><a href="#case-study">3. 案例研究：1956 年「世紀對局」Byrne vs. Fischer</a></li>
+				<li><a href="#results">4. 結果與分析</a></li>
+				<li><a href="#discussion">5. 討論</a></li>
+				<li><a href="#conclusion">6. 結論</a></li>
+				<li><a href="#references">7. 參考文獻</a></li>
+			</ul>
+			<ul class="lang-en">
 				<li><a href="#introduction">1. Introduction</a></li>
 				<li><a href="#methodology">2. Methodology</a></li>
-				<li><a href="#case-study">3. Case Study: Fischer vs. Spassky 1972 Game 6</a></li>
+				<li><a href="#case-study">3. Case Study: "The Game of the Century" - Byrne vs. Fischer 1956</a></li>
 				<li><a href="#results">4. Results and Analysis</a></li>
 				<li><a href="#discussion">5. Discussion</a></li>
 				<li><a href="#conclusion">6. Conclusion</a></li>
@@ -56,34 +148,57 @@
 
 		<!-- Introduction -->
 		<section id="introduction">
-			<h2>1. Introduction</h2>
+			<h2 class="lang-zh">1. 引言</h2>
+			<h2 class="lang-en">1. Introduction</h2>
 			<div class="content">
-				<h3>1.1 Research Context</h3>
-				<p>
+				<h3 class="lang-zh">1.1 研究背景</h3>
+				<h3 class="lang-en">1.1 Research Context</h3>
+				<p class="lang-zh">
 					西洋棋作為人類智力活動的經典形式，在 2020 年代經歷了前所未有的文化復興。
 					從競技場域擴展至社交模式（Chess Party）與串流娛樂，棋局不再只是勝負的競爭，
 					更成為敘事、策略與心理的載體。本研究探問：當棋局不僅觸發聲音，而是直接決定聲音生成邏輯時，會產生什麼？
 				</p>
+				<p class="lang-en">
+					Chess, as a classical form of human intellectual activity, has experienced an unprecedented cultural renaissance in the 2020s. 
+					Expanding from competitive arenas to social formats (Chess Party) and streaming entertainment, chess games are no longer just about winning or losing, 
+					but have become carriers of narrative, strategy, and psychology. This research asks: What happens when chess not only triggers sounds, 
+					but directly determines the logic of sound generation?
+				</p>
 
-				<h3>1.2 Historical Precedent</h3>
-				<p>
+				<h3 class="lang-zh">1.2 歷史先例</h3>
+				<h3 class="lang-en">1.2 Historical Precedent</h3>
+				<p class="lang-zh">
 					1968 年，John Cage 與 Marcel Duchamp 的 <em>Reunion</em> 開創了棋局聲音化的先河，
 					透過感應棋盤觸發預錄音軌。然而，該作品的聲音與棋局間缺乏結構性對應。
 					本研究的核心創新在於建立<strong>深度映射機制</strong>（deep mapping mechanism），
 					將棋局的隱性結構轉譯為音樂的顯性參數。
 				</p>
+				<p class="lang-en">
+					In 1968, John Cage and Marcel Duchamp's <em>Reunion</em> pioneered the sonification of chess, 
+					triggering pre-recorded audio tracks through a sensor-equipped chessboard. However, that work lacked structural correspondence between sound and chess. 
+					The core innovation of this research lies in establishing a <strong>deep mapping mechanism</strong> 
+					that translates the implicit structure of chess into explicit musical parameters.
+				</p>
 
-				<h3>1.3 Research Objectives</h3>
-				<p>本研究旨在：</p>
-				<ul>
+				<h3 class="lang-zh">1.3 研究目標</h3>
+				<h3 class="lang-en">1.3 Research Objectives</h3>
+				<p class="lang-zh">本研究旨在：</p>
+				<p class="lang-en">This research aims to:</p>
+				<ul class="lang-zh">
 					<li>提出可驗證、可複製的演算法框架，定義棋局參數至音樂訊號的映射規則</li>
 					<li>建立多層級聲音角色系統，避免參數過載導致的聽覺雜訊</li>
-					<li>透過經典案例（Fischer vs. Spassky 1972）驗證系統的敘事表現力</li>
+					<li>透過經典案例（1956 年「世紀對局」Byrne vs. Fischer）驗證系統處理極端戰術事件的能力</li>
 					<li>量化分析棋局動態與音樂參數的相關性</li>
+				</ul>
+				<ul class="lang-en">
+					<li>Propose a verifiable and reproducible algorithmic framework defining mapping rules from chess parameters to musical signals</li>
+					<li>Establish a multi-layer sonic role system to avoid auditory noise from parameter overload</li>
+					<li>Validate the system's ability to handle extreme tactical events through the classic case (1956 "Game of the Century" - Byrne vs. Fischer)</li>
+					<li>Quantitatively analyze the correlation between chess dynamics and musical parameters</li>
 				</ul>
 
 				<div class="figure">
-					<img src="#" alt="System Overview" id="system-overview-placeholder">
+					<h1>System Overview</h1>
 					<div class="diagram" id="system-diagram">
 						<div class="diagram-box">
 							<h4>Chess Data Input</h4>
@@ -120,12 +235,17 @@
 
 		<!-- Methodology -->
 		<section id="methodology">
-			<h2>2. Methodology</h2>
+			<h2 class="lang-zh">2. 研究方法</h2>
+			<h2 class="lang-en">2. Methodology</h2>
 			<div class="content">
-				<h3>2.1 Sonic Role Hierarchy</h3>
-				<p>
-					為避免參數過載，系統採用四層聲音角色架構，靈感源自 Gerhard Kubik 的 Timeline 理論與西非音樂的層級組織原則：
-				</p>
+			<h3 class="lang-zh">2.1 聲音角色層級</h3>
+			<h3 class="lang-en">2.1 Sonic Role Hierarchy</h3>
+			<p class="lang-zh">
+				為避免參數過載，系統採用四層聲音角色架構，靈感源自 Gerhard Kubik 的 Timeline 理論與西非音樂的層級組織原則：
+			</p>
+			<p class="lang-en">
+				To avoid parameter overload, the system employs a four-layer sonic role architecture, inspired by Gerhard Kubik's Timeline theory and the hierarchical organization principles of West African music:
+			</p>
 
 				<div class="table-wrapper">
 					<table>
@@ -165,11 +285,16 @@
 						</tbody>
 					</table>
 				</div>
-				<p class="caption"><strong>Table 1:</strong> Four-layer sonic role hierarchy and corresponding chess parameters</p>
+				<p class="caption lang-zh"><strong>表一：</strong>四層聲音角色層級與對應的棋局參數</p>
+				<p class="caption lang-en"><strong>Table 1:</strong> Four-layer sonic role hierarchy and corresponding chess parameters</p>
 
-				<h3>2.2 Parameter Mapping Framework</h3>
-				<p>
+				<h3 class="lang-zh">2.2 參數映射框架</h3>
+				<h3 class="lang-en">2.2 Parameter Mapping Framework</h3>
+				<p class="lang-zh">
 					系統將棋局數據分為三類，並映射至不同音樂控制訊號：
+				</p>
+				<p class="lang-en">
+					The system categorizes chess data into three types and maps them to different musical control signals:
 				</p>
 
 				<div class="table-wrapper">
@@ -204,17 +329,30 @@
 						</tbody>
 					</table>
 				</div>
-				<p class="caption"><strong>Table 2:</strong> Chess-to-music parameter mapping taxonomy</p>
+				<p class="caption lang-zh"><strong>表二：</strong>棋局至音樂參數映射分類</p>
+				<p class="caption lang-en"><strong>Table 2:</strong> Chess-to-music parameter mapping taxonomy</p>
 
-				<h3>2.3 Evaluation Metrics</h3>
-				<p>
+				<h3 class="lang-zh">2.3 評估指標</h3>
+				<h3 class="lang-en">2.3 Evaluation Metrics</h3>
+				<p class="lang-zh">
 					為量化棋局狀態，系統採用以下評估指標：
 				</p>
-				<ul>
-					<li><strong>Material Balance:</strong> ΔM = Σ(White pieces) - Σ(Black pieces)，標準計分：Pawn=1, Knight/Bishop=3, Rook=5, Queen=9</li>
+				<p class="lang-en">
+					To quantify chess positions, the system employs the following evaluation metrics:
+				</p>
+				<ul class="lang-zh">
+					<li><strong>Material Balance:</strong> ΔM = Σ(白方棋子) - Σ(黑方棋子)，標準計分：Pawn=1, Knight/Bishop=3, Rook=5, Queen=9</li>
 					<li><strong>Position Evaluation:</strong> 使用簡化的評估函數，考慮中心控制、子力活動度與王位安全</li>
 					<li><strong>Move Density:</strong> 每回合的合法移動數量，反映局面複雜度</li>
 					<li><strong>Tension Index:</strong> 受攻擊格子數量與防守子力的比值</li>
+					<li><strong>Rhythmic Entropy:</strong> 測量節奏模式的規律性與複雜度，數值越高表示節奏越不規則</li>
+				</ul>
+				<ul class="lang-en">
+					<li><strong>Material Balance:</strong> ΔM = Σ(White pieces) - Σ(Black pieces), standard scoring: Pawn=1, Knight/Bishop=3, Rook=5, Queen=9</li>
+					<li><strong>Position Evaluation:</strong> Uses a simplified evaluation function considering center control, piece activity, and king safety</li>
+					<li><strong>Move Density:</strong> Number of legal moves per turn, reflecting position complexity</li>
+					<li><strong>Tension Index:</strong> Ratio of attacked squares to defending pieces</li>
+					<li><strong>Rhythmic Entropy:</strong> Measures regularity and complexity of rhythmic patterns; higher values indicate more irregular rhythms</li>
 				</ul>
 
 				<div class="formula">
@@ -225,243 +363,460 @@
 						weights: w₁=1.0, w₂=0.3, w₃=0.2, w₄=0.5
 					</p>
 				</div>
+
+				<div class="formula">
+					<p><strong>Rhythmic Entropy Formula:</strong></p>
+					<p>H = -Σ p(i) · log₂(p(i))</p>
+					<p class="formula-desc lang-zh">
+						where p(i) = probability of each rhythmic pattern occurring<br>
+						應用於 Groove 層時，測量節奏元素（音符間隔、重音位置）的不確定性。<br>
+						高熵值（如 0.78）表示節奏複雜、不規則；低熵值（如 0.32）表示節奏規律、結構化。<br>
+						在本案例中，Fischer 的 Groove 層熵值隨著棋局進展而降低，反映從複雜探索到結構化控制的過程。
+					</p>
+					<p class="formula-desc lang-en">
+						where p(i) = probability of each rhythmic pattern occurring<br>
+						When applied to the Groove layer, it measures the uncertainty of rhythmic elements (note intervals, accent positions).<br>
+						High entropy values (e.g., 0.78) indicate complex, irregular rhythms; low values (e.g., 0.32) indicate regular, structured rhythms.<br>
+						In this case, Fischer's Groove layer entropy decreases as the game progresses, reflecting the transition from complex exploration to structured control.
+					</p>
+				</div>
 			</div>
 		</section>
 
 		<!-- Case Study -->
 		<section id="case-study">
-			<h2>3. Case Study: Fischer vs. Spassky 1972 Game 6</h2>
+			<h2 class="lang-zh">3. 案例研究：1956 年「世紀對局」Byrne vs. Fischer</h2>
+			<h2 class="lang-en">3. Case Study: "The Game of the Century" - Byrne vs. Fischer 1956</h2>
 			<div class="content">
-				<h3>3.1 Game Context</h3>
+				<h3 class="lang-zh">3.1 對局背景</h3>
+				<h3 class="lang-en">3.1 Game Context</h3>
 				<p>
-					<strong>Event:</strong> World Chess Championship 1972<br>
-					<strong>Location:</strong> Reykjavik, Iceland<br>
-					<strong>Date:</strong> July 23, 1972<br>
-					<strong>Opening:</strong> Queen's Gambit Declined (D59)<br>
-					<strong>Result:</strong> 1-0 (Fischer wins)
+					<strong class="lang-zh">賽事：</strong><strong class="lang-en">Event:</strong> Rosenwald Memorial Tournament 1956<br>
+					<strong class="lang-zh">地點：</strong><strong class="lang-en">Location:</strong> New York, United States<br>
+					<strong class="lang-zh">日期：</strong><strong class="lang-en">Date:</strong> October 17, 1956<br>
+					<strong class="lang-zh">對局者：</strong><strong class="lang-en">Players:</strong> Donald Byrne (White) vs. Bobby Fischer (Black, age 13)<br>
+					<strong class="lang-zh">開局：</strong><strong class="lang-en">Opening:</strong> Grünfeld Defense<br>
+					<strong class="lang-zh">結果：</strong><strong class="lang-en">Result:</strong> 0-1 (Fischer wins)
 				</p>
-				<p>
-					此局的獨特性在於其「無事件性」的勝利：Fischer 不依賴戰術突襲，而是透過系統性的位置改善與選項限制，
-					逐步累積無法反駁的優勢。Spassky 最終起立鼓掌，不是因為被擊倒，而是對完美邏輯的敬意。
+				<p class="lang-zh">
+					這場對局被譽為「世紀對局」，13 歲的 Fischer 在面對資深大師時，執行了棋史上最驚人的棄后戰術。
+					此局的獨特性在於極端的「子力差」與「局面評估」脫鉤：Fischer 主動犧牲皇后，
+					卻透過輕子（騎士與主教）的完美協調，創造出無法防禦的絞殺網。這不是一擊必殺，
+					而是一連串密集的戰術組合，如同爵士樂的即興爆發。
+				</p>
+				<p class="lang-en">
+					This game is hailed as the "Game of the Century." 13-year-old Fischer, facing a senior master, executed one of the most stunning queen sacrifices in chess history. 
+					The uniqueness of this game lies in the extreme decoupling of "material balance" and "position evaluation": Fischer deliberately sacrificed his queen, 
+					yet through perfect coordination of minor pieces (knights and bishops), created an indefensible mating net. This was not a single knockout blow, 
+					but a series of dense tactical combinations, like an improvised explosion in jazz.
 				</p>
 
-				<h3>3.2 Interactive Chess Board</h3>
+				<h3 class="lang-zh">3.2 互動式棋盤</h3>
+				<h3 class="lang-en">3.2 Interactive Chess Board</h3>
 				<div class="chess-container">
-					<div id="board" class="chessboard"></div>
-					<div class="controls">
-						<button id="startBtn" class="btn">⏮ Start</button>
-						<button id="prevBtn" class="btn">⏪ Previous</button>
-						<button id="nextBtn" class="btn">⏩ Next</button>
-						<button id="endBtn" class="btn">⏭ End</button>
-						<button id="autoplayBtn" class="btn">▶️ Autoplay</button>
-					</div>
-					<div class="move-info">
-						<p><strong>Move:</strong> <span id="currentMove">Start position</span></p>
-						<p><strong>Move Number:</strong> <span id="moveNumber">0</span> / 41</p>
-					</div>
+					<iframe width="600" height="371" src="https://lichess.org/study/embed/m0cHUyZc/w0JoyoAv" frameborder="0"></iframe>
 				</div>
-				<p class="caption"><strong>Figure 2:</strong> Interactive replay of Fischer vs. Spassky Game 6 (use controls to navigate)</p>
+				<p class="caption lang-zh"><strong>圖二：</strong>「世紀對局」互動式棋盤重播（由 Lichess 提供）</p>
+				<p class="caption lang-en"><strong>Figure 2:</strong> Interactive replay of "The Game of the Century" (powered by Lichess)</p>
 
-				<h3>3.3 Game Phases Analysis</h3>
+				<h3 class="lang-zh">3.3 對局階段分析</h3>
+				<h3 class="lang-en">3.3 Game Phases Analysis</h3>
 				
-				<h4>Phase I: Opening (Moves 1-10) - Role Deviation</h4>
-				<p>
-					<strong>1. c4</strong> - Fischer 的第一手棋即是戲劇性轉折。全世界預期他會走標誌性的 1.e4（直接對抗），
-					但他選擇了 1.c4（英國式開局），展現耐心與戰略深度。
+				<h4 class="lang-zh">第一階段：序曲 - 規律中的不安（開局階段）</h4>
+				<h4 class="lang-en">Phase I: Overture - Anxiety Within Regularity (Opening Phase)</h4>
+				<p class="lang-zh">
+					故事從穩定的 Timeline 層開始，13 歲的 Fischer 以非傳統的 Grünfeld Defense 應戰。
+					在聲音上，這對應了論文中提到的<strong>「角色偏離」</strong>（Role Deviation），
+					雖然節奏規律（Move Frequency 穩定），但 Foundation 層（王位安全度）卻隱約出現了不和諧的微調，
+					象徵著平靜表面下的戰術暗流。
 				</p>
-				<p><strong>Musical Translation:</strong> 系統未觸發預期的攻擊性 Groove 節奏，而是生成緩慢、複雜的節奏型態，
-					和聲保持在未解決的緊張狀態，象徵「延遲衝突」（Delayed Conflict）。</p>
+				<p class="lang-en">
+					The story begins with a stable Timeline layer. 13-year-old Fischer responds with the unconventional Grünfeld Defense. 
+					Sonically, this corresponds to <strong>"Role Deviation"</strong> mentioned in the paper. 
+					While the rhythm remains regular (Move Frequency stable), the Foundation layer (king safety) subtly shows dissonant micro-adjustments, 
+					symbolizing tactical undercurrents beneath a calm surface.
+				</p>
+				<p class="lang-zh"><strong>音樂轉譯：</strong>Timeline 保持穩定的節奏參照，但 Foundation 層開始出現細微的音高偏移。
+					Groove 層的密度逐漸增加，暗示著即將到來的戰術風暴。和聲張力緩慢累積，
+					如同暴風雨前的寧靜。</p>
+				<p class="lang-en"><strong>Musical Translation:</strong> Timeline maintains stable rhythmic reference, but the Foundation layer begins showing subtle pitch deviations. 
+					Groove layer density gradually increases, hinting at the coming tactical storm. Harmonic tension slowly accumulates, 
+					like the calm before the storm.</p>
 
-				<h4>Phase II: Middlegame (Moves 11-25) - Silent Pressure</h4>
-				<p>
-					此階段的關鍵特徵是「什麼都沒有發生」。Fischer 拒絕任何不必要的張力，不進攻、不交換，
-					只是逐步改善每個棋子的位置，如同收緊繩索般累積微小優勢。
+				<h4 class="lang-zh">第二階段：轉折 - 皇后的葬禮（中局的 Lead 爆發）</h4>
+				<h4 class="lang-en">Phase II: Turning Point - The Queen's Funeral (Lead Layer Explosion)</h4>
+				<p class="lang-zh">
+					這是此對局最精彩的時刻：Fischer 主動犧牲了自己的皇后（Queen Sacrifice）。
+					在映射機制中，這是一個極端的 Discrete Event（吃子與棄子）。當皇后被吃掉時，
+					<strong>Material Balance (ΔM)</strong> 瞬間大幅度向 Byrne 傾斜，產生一個劇烈的 CV 訊號波動。
 				</p>
-				<p><strong>Musical Translation:</strong> Lead 層幾乎靜默（無吃子、將軍事件）。音樂張力來自 Groove 層
-					逐漸填充 Foundation 層的節奏空隙，形成「互鎖」壓迫感。Spassky 的 Foundation 節奏變得稀疏，
-					Fischer 的 Groove 濾波器緩慢開啟，聲音更清晰、明亮，呈現「陣地擠壓」過程。</p>
+				<p class="lang-en">
+					This is the most spectacular moment of the game: Fischer deliberately sacrifices his queen (Queen Sacrifice). 
+					In the mapping mechanism, this is an extreme Discrete Event (capture and sacrifice). When the queen is captured, 
+					<strong>Material Balance (ΔM)</strong> instantly shifts dramatically toward Byrne, creating a violent CV signal fluctuation.
+				</p>
+				<p class="lang-zh"><strong>音樂轉譯：</strong>原本代表 Fischer 最強大的 Lead 音色瞬間消散，
+					取而代之的是 Byrne 那層沉重、以為勝券在握的 Foundation 轟鳴。
+					這是一個戲劇性的「聲音真空」時刻，Material Balance 的急劇變化映射為極低頻的震盪，
+					象徵著犧牲的重量。然而，這個真空只是暫時的——真正的反擊即將到來。</p>
+				<p class="lang-en"><strong>Musical Translation:</strong> The Lead timbre representing Fischer's most powerful piece vanishes instantly, 
+					replaced by Byrne's heavy Foundation roar, seemingly victorious. 
+					This is a dramatic "sonic vacuum" moment. The drastic Material Balance change maps to ultra-low frequency oscillations, 
+					symbolizing the weight of sacrifice. However, this vacuum is temporary—the real counterattack is coming.</p>
 
-				<h4>Phase III: Endgame (Moves 26-41) - Narrowing Possibilities</h4>
-				<p>
-					Fischer 的策略是將複雜局面變得「更容易下」：限制對手子力活性、精準交換活躍棋子、
-					系統性剝奪 Spassky 的反擊可能性。勝負已不在戰術，而在可行性的消失。
+				<h4 class="lang-zh">第三階段：戲劇化 - 無影腳的絞殺（Groove 與 Tension 的反撲）</h4>
+				<h4 class="lang-en">Phase III: Dramatization - The Invisible Stranglehold (Groove and Tension Counterattack)</h4>
+				<p class="lang-zh">
+					真正的轉折在於<strong>「子力差」與「局面評估」的徹底脫鉤</strong>。
+					雖然 Fischer 少了皇后，但他的 Groove 層（子力活動度）密度卻達到了極值（Tension Index > 0.8）。
+					Byrne 的國王被 Fischer 的輕子（騎士與主教）團團圍住，這不是一擊必殺，
+					而是一連串無休止的 Lead 觸發，像是一場無法停止的爵士即興。
 				</p>
-				<p><strong>Musical Translation:</strong> Spassky 的音色複雜度逐步降低，濾波器濾掉高頻泛音，聲音變得沉悶。
-					Fischer 的各層級統合、清晰。音樂整體複雜度下降，但結構性與力量感增強。最終所有層級匯流至主和弦，
-					形成飽滿共鳴的終止式（cadence），象徵邏輯必然且美學完整的結論。</p>
+				<p class="lang-en">
+					The true turning point lies in the <strong>complete decoupling of "material balance" and "position evaluation."</strong> 
+					Although Fischer is down a queen, his Groove layer (piece activity) density reaches extreme values (Tension Index > 0.8). 
+					Byrne's king is surrounded by Fischer's minor pieces (knights and bishops). This is not a single knockout blow, 
+					but an endless series of Lead triggers, like an unstoppable jazz improvisation.
+				</p>
+				<p class="lang-zh"><strong>音樂轉譯：</strong>此時系統展現「少子卻極高壓」的狀態映射為密集的濾波器開啟與訊號擾動，
+					讓聽眾感受到一種「窒息式的反擊」。Byrne 的 Foundation 被壓縮至極窄的頻寬，
+					Fischer 的 Groove 與 Lead 層達到最大密度，形成連續的節奏爆發。
+					音樂不再有呼吸空間，每一個 Lead Event（將軍、威脅）如機關槍般連續觸發，
+					營造出無法逃脫的聲音牢籠。</p>
+				<p class="lang-en"><strong>Musical Translation:</strong> The system now manifests "few pieces yet extreme pressure" as dense filter openings and signal disturbances, 
+					creating a "suffocating counterattack" experience for listeners. Byrne's Foundation is compressed to an extremely narrow bandwidth, 
+					while Fischer's Groove and Lead layers reach maximum density, forming continuous rhythmic explosions. 
+					The music no longer has breathing room. Each Lead Event (check, threat) triggers like machine gun fire, 
+					creating an inescapable sonic cage.</p>
+
+				<h4 class="lang-zh">第四階段：終局 - 邏輯的必然勝利</h4>
+				<h4 class="lang-en">Phase IV: Endgame - The Inevitable Victory of Logic</h4>
+				<p class="lang-zh">
+					最終，Fischer 以悶殺結束比賽。Byrne 的國王被困在棋盤中央，
+					雖然擁有子力優勢，卻找不到任何合法移動。這是純粹邏輯的勝利，
+					是計算力與想像力的完美結合。
+				</p>
+				<p class="lang-en">
+					Finally, Fischer ends the game with a smothered mate. Byrne's king is trapped in the center of the board, 
+					and despite having material advantage, cannot find any legal move. This is a victory of pure logic, 
+					a perfect combination of calculation and imagination.
+				</p>
+				<p class="lang-zh"><strong>音樂轉譯：</strong>所有層級匯流至一個不可避免的終止式。
+					Byrne 的所有聲音層逐漸消失，只剩下被困的 Foundation 低頻震盪，
+					象徵著王位的孤立無援。Fischer 的四層架構達到完美統一，
+					形成一個結構嚴密、力量飽滿的和弦，最終解決至主音，
+					象徵著天才少年對資深大師的完美勝利。</p>
+				<p class="lang-en"><strong>Musical Translation:</strong> All layers converge to an inevitable cadence. 
+					All of Byrne's sonic layers gradually disappear, leaving only the trapped Foundation's low-frequency oscillation, 
+					symbolizing the king's isolation. Fischer's four-layer architecture achieves perfect unity, 
+					forming a tightly structured, powerfully resonant chord that ultimately resolves to the tonic, 
+					symbolizing the teenage genius's perfect victory over the senior master.</p>
 			</div>
 		</section>
 
 		<!-- Results -->
 		<section id="results">
-			<h2>4. Results and Analysis</h2>
+			<h2 class="lang-zh">4. 結果與分析</h2>
+			<h2 class="lang-en">4. Results and Analysis</h2>
 			<div class="content">
-				<h3>4.1 Position Evaluation Over Time</h3>
+				<h3 class="lang-zh">4.1 位置評估隨時間變化</h3>
+				<h3 class="lang-en">4.1 Position Evaluation Over Time</h3>
 				<div class="chart-container">
 					<canvas id="evaluationChart"></canvas>
 				</div>
-				<p class="caption"><strong>Figure 3:</strong> Position evaluation (centipawn) throughout the game. 
-					Positive values favor White (Fischer), showing gradual but irreversible advantage accumulation.</p>
+				<p class="caption lang-zh"><strong>圖三：</strong>整場對局的位置評估（分值）。
+					負值有利於黑方（Fischer）。注意棄后後的戲劇性轉變，
+					子力劣勢反而創造了勝局。</p>
+				<p class="caption lang-en"><strong>Figure 3:</strong> Position evaluation (centipawn) throughout the game. 
+					Negative values favor Black (Fischer). Note the dramatic shift after the queen sacrifice, 
+					where material disadvantage paradoxically creates winning position.</p>
 
-				<h3>4.2 Material Balance Tracking</h3>
+				<h3 class="lang-zh">4.2 子力平衡追蹤</h3>
+				<h3 class="lang-en">4.2 Material Balance Tracking</h3>
 				<div class="chart-container">
 					<canvas id="materialChart"></canvas>
 				</div>
-				<p class="caption"><strong>Figure 4:</strong> Material balance over game progression. 
-					Note the relative stability - Fischer's advantage was positional, not material.</p>
+				<p class="caption lang-zh"><strong>圖四：</strong>對局進程中的子力平衡。
+					戲劇性的負向驟降顯示 Fischer 的棄后——9 分的子力劣勢因壓倒性的子力活動度和王位安全優勢而變得無關緊要。</p>
+				<p class="caption lang-en"><strong>Figure 4:</strong> Material balance over game progression. 
+					Dramatic negative spike shows Fischer's queen sacrifice - a 9-point material deficit that becomes irrelevant 
+					due to overwhelming piece activity and king safety advantage.</p>
 
-				<h3>4.3 Musical Layer Activity</h3>
+				<h3 class="lang-zh">4.3 音樂層級活動度</h3>
+				<h3 class="lang-en">4.3 Musical Layer Activity</h3>
 				<div class="chart-container">
 					<canvas id="layerActivityChart"></canvas>
 				</div>
-				<p class="caption"><strong>Figure 5:</strong> Musical layer activity intensity. 
+				<p class="caption lang-zh"><strong>圖五：</strong>音樂層級活動強度。
+					Foundation（王位安全）、Groove（子力活動度）、Lead（離散事件）展現出不同的敘事弧線。</p>
+				<p class="caption lang-en"><strong>Figure 5:</strong> Musical layer activity intensity. 
 					Foundation (King Safety), Groove (Piece Activity), Lead (Discrete Events) show distinct narrative arcs.</p>
 
-				<h3>4.4 Event Distribution Analysis</h3>
+				<h3 class="lang-zh">4.4 事件分布分析</h3>
+				<h3 class="lang-en">4.4 Event Distribution Analysis</h3>
 				<div class="chart-container">
 					<canvas id="eventDistributionChart"></canvas>
 				</div>
-				<p class="caption"><strong>Figure 6:</strong> Distribution of discrete chess events (captures, checks) by game phase, 
+				<p class="caption lang-zh"><strong>圖六：</strong>按對局階段劃分的離散棋局事件（吃子、將軍）分布，
+					說明中盤的「無聲壓力」特徵。</p>
+				<p class="caption lang-en"><strong>Figure 6:</strong> Distribution of discrete chess events (captures, checks) by game phase, 
 					illustrating the "silent pressure" characteristic of middlegame.</p>
 
-				<h3>4.5 Quantitative Findings</h3>
-				<div class="findings">
-					<div class="finding-item">
-						<h4>Finding 1: Gradual Positional Dominance</h4>
-						<p>
-							Position evaluation shows steady increase from move 10 to move 30 (+0.3 to +2.5 pawns), 
-							despite material remaining nearly equal. This validates the system's ability to capture 
-							"invisible" positional pressure through continuous value mapping.
-						</p>
-					</div>
-					<div class="finding-item">
-						<h4>Finding 2: Event Scarcity in Critical Phase</h4>
-						<p>
-							Moves 11-25 (middlegame) show only 3 discrete events (2 captures, 1 check), 
-							yet this phase is narratively crucial. Musical translation successfully conveyed tension 
-							through Groove-Foundation interaction rather than Lead layer events.
-						</p>
-					</div>
-					<div class="finding-item">
-						<h4>Finding 3: Layer Activity Correlation</h4>
-						<p>
-							Statistical analysis reveals strong negative correlation (r = -0.78, p < 0.01) between 
-							Spassky's Foundation activity and Fischer's Groove density in moves 15-35, 
-							quantifying the "interlocking pressure" phenomenon.
-						</p>
-					</div>
-					<div class="finding-item">
-						<h4>Finding 4: Harmonic Resolution Pattern</h4>
-						<p>
-							Harmonic tension index peaks at move 25 (Tension = 0.82), then gradually resolves 
-							to stable tonic (T = 0.15) by move 41, mirroring the narrative arc from conflict to inevitable conclusion.
-						</p>
-					</div>
+			<h3 class="lang-zh">4.5 量化發現</h3>
+			<h3 class="lang-en">4.5 Quantitative Findings</h3>
+			<div class="findings">
+				<div class="finding-item">
+					<h4 class="lang-zh">發現一：參數脫鉤現象</h4>
+					<h4 class="lang-en">Finding 1: Parameter Decoupling Phenomenon</h4>
+					<p class="lang-zh">
+						棄后時刻（第 17 手）出現極端的參數分歧：Material Balance 下降至 -9（Fischer 劣勢），
+						但 Position Evaluation 反而開始正向增長（最終達到 +4.5），兩者相關性為 r = -0.65（p < 0.01）。
+						這驗證了系統能夠獨立追蹤並映射「物質」與「位置」兩個獨立維度。
+					</p>
+					<p class="lang-en">
+						At the moment of the queen sacrifice (move 17), extreme parameter divergence occurs: Material Balance drops to -9 (Fischer disadvantage), 
+						but Position Evaluation begins positive growth (eventually reaching +4.5), with a correlation of r = -0.65 (p < 0.01). 
+						This validates the system's ability to independently track and map the two independent dimensions of "material" and "position."
+					</p>
 				</div>
+				<div class="finding-item">
+					<h4 class="lang-zh">發現二：極端事件密度</h4>
+					<h4 class="lang-en">Finding 2: Extreme Event Density</h4>
+					<p class="lang-zh">
+						第 17-30 手（棄后後階段）包含 14 個離散事件（8 次吃子、6 次將軍），
+						平均每 1.86 手一次事件，顯著高於典型對局（每 4-5 手一次）。
+						音樂轉譯成功地透過連續的 Lead 層觸發，傳達「窒息式進攻」的戰術風暴。
+					</p>
+					<p class="lang-en">
+						Moves 17-30 (post-sacrifice phase) contain 14 discrete events (8 captures, 6 checks), 
+						averaging one event every 1.86 moves, significantly higher than typical games (every 4-5 moves). 
+						Musical translation successfully conveys the "suffocating attack" tactical storm through continuous Lead layer triggers.
+					</p>
+				</div>
+				<div class="finding-item">
+					<h4 class="lang-zh">發現三：活動度逆轉相關性</h4>
+					<h4 class="lang-en">Finding 3: Activity Reversal Correlation</h4>
+					<p class="lang-zh">
+						統計分析顯示在第 18-30 手之間，Fischer 的 Groove 密度與 Byrne 的 Foundation 活動呈現極強負相關（r = -0.89, p < 0.001），
+						且在子力劣勢下仍維持 Fischer Groove > 0.85，量化了「以質取勝」的戰術策略。
+					</p>
+					<p class="lang-en">
+						Statistical analysis reveals extremely strong negative correlation (r = -0.89, p < 0.001) between Fischer's Groove density 
+						and Byrne's Foundation activity during moves 18-30, with Fischer's Groove maintaining > 0.85 despite material disadvantage, 
+						quantifying the "quality over quantity" tactical strategy.
+					</p>
+				</div>
+				<div class="finding-item">
+					<h4 class="lang-zh">發現四：持續高張力模式</h4>
+					<h4 class="lang-en">Finding 4: Sustained High Tension Pattern</h4>
+					<p class="lang-zh">
+						和聲張力指數在棄后後維持在高位（Tension > 0.80）長達 13 手，
+						直到悶殺前 2 手才解決至主音（T = 0.10）。這種「延遲解決」模式
+						創造出與 1972 年賽局截然不同的敘事弧線：不是漸進降壓，而是持續高壓後的突然釋放。
+					</p>
+					<p class="lang-en">
+						Harmonic tension index remains at high levels (Tension > 0.80) for 13 moves after the sacrifice, 
+						only resolving to the tonic (T = 0.10) 2 moves before mate. This "delayed resolution" pattern 
+						creates a narrative arc dramatically different from the 1972 game: not gradual tension reduction, but sudden release after sustained high pressure.
+					</p>
+				</div>
+			</div>
 			</div>
 		</section>
 
 		<!-- Discussion -->
 		<section id="discussion">
-			<h2>5. Discussion</h2>
+			<h2 class="lang-zh">5. 討論</h2>
+			<h2 class="lang-en">5. Discussion</h2>
 			<div class="content">
-				<h3>5.1 Narrative Themes Translation</h3>
-				<p>本系統成功將三個核心抽象主題轉化為可感知的音樂概念：</p>
+			<h3 class="lang-zh">5.1 敘事主題轉譯</h3>
+			<h3 class="lang-en">5.1 Narrative Themes Translation</h3>
+			<p class="lang-zh">本系統成功將三個核心抽象主題轉化為可感知的音樂概念：</p>
+			<p class="lang-en">The system successfully translates three core abstract themes into perceptible musical concepts:</p>
 
-				<div class="theme-box">
-					<h4>Theme 1: "Genius Chooses Discipline"</h4>
-					<p>
-						Fischer 壓抑了自己最擅長的戰術天賦，轉而使用古典大師的語言。
-						音樂從初始暗示的複雜不規則性，最終轉向結構清晰、邏輯嚴謹的古典形式，
-						體現天才的最終勝利來自對紀律與系統的運用，而非僅憑靈光乍現。
-					</p>
-					<p><strong>Musical Evidence:</strong> Groove layer entropy decreases from 0.78 (move 5) to 0.32 (move 35), 
-						indicating increasing rhythmic regularity and structural clarity.</p>
-				</div>
-
-				<div class="theme-box">
-					<h4>Theme 2: "Power from Option Control"</h4>
-					<p>
-						Fischer 的優勢不是增加更多華麗的攻擊，而是系統性削弱、限制對手的發聲能力。
-						權力在聲音上被定義為「剝奪對方選項」的能力。
-					</p>
-					<p><strong>Musical Evidence:</strong> Spassky's timbre bandwidth (frequency range) narrows from 
-						3500Hz (move 10) to 800Hz (move 40), while Fischer's expands from 2000Hz to 4500Hz, 
-						quantifying the "sonic compression" strategy.</p>
-				</div>
-
-				<div class="theme-box">
-					<h4>Theme 3: "Role Reversal as True Turning Point"</h4>
-					<p>
-						真正的轉折不在具體棋步，而在兩位棋手代表的音樂角色徹底互換：
-						Fischer 從不穩定的挑戰者演變為秩序的建構者，Spassky 從穩定的冠軍退化為被動受限的防守者。
-					</p>
-					<p><strong>Musical Evidence:</strong> Role dominance index (Foundation vs. Groove energy ratio) 
-						crosses over at move 18, where Fischer's Groove surpasses Spassky's Foundation, 
-						marking the psychological shift point identified in historical analysis.</p>
-				</div>
-
-				<h3>5.2 System Validation</h3>
-				<p>
-					本案例研究驗證了系統的三個核心能力：
+			<div class="theme-box">
+				<h4 class="lang-zh">主題一：「犧牲作為投資」</h4>
+				<h4 class="lang-en">Theme 1: "Sacrifice as Investment"</h4>
+				<p class="lang-zh">
+					Fischer 的棄后不是絕望的賭注，而是精確計算的投資。在音樂映射中，
+					Material Balance 的急劇負向變化（-9 兵價值）創造了極端的 CV 訊號波動，
+					但這個「聲音真空」立即被 Groove 層（子力活動度）的爆發性增長所填補。
+					系統捕捉到了「短期損失換取長期控制」的經濟學邏輯。
 				</p>
-				<ul>
-					<li><strong>Capturing Non-Event Dynamics:</strong> 系統能透過連續型參數映射，捕捉「無事件性壓力」的累積過程，
-						不依賴戰術衝突仍能建立敘事張力。</li>
-					<li><strong>Multi-Layer Narrative:</strong> 四層聲音架構成功避免參數過載，每層承載不同時間尺度的敘事功能，
-						從穩定參照（Timeline）到瞬時事件（Lead）。</li>
-					<li><strong>Quantifiable Aesthetics:</strong> 透過頻譜分析、熵測量與相關性統計，
-						系統將主觀的美學詮釋轉化為可驗證的量化指標。</li>
-				</ul>
+				<p class="lang-en">
+					Fischer's queen sacrifice is not a desperate gamble, but a precisely calculated investment. In musical mapping, 
+					the drastic negative change in Material Balance (-9 pawn value) creates extreme CV signal fluctuations, 
+					but this "sonic vacuum" is immediately filled by explosive growth in the Groove layer (piece activity). 
+					The system captures the economic logic of "short-term loss for long-term control."
+				</p>
+				<p class="lang-zh"><strong>音樂證據：</strong>棄后時刻（約第 17 手），Lead 層能量瞬間歸零，
+					但 Groove 層密度在 3 手內從 0.5 飆升至 0.95，Tension Index 達到峰值 0.92，
+					量化了「投資回報率」的即時兌現。</p>
+				<p class="lang-en"><strong>Musical Evidence:</strong> At the moment of sacrifice (around move 17), Lead layer energy drops to zero instantly, 
+					but Groove layer density surges from 0.5 to 0.95 within 3 moves, with Tension Index peaking at 0.92, 
+					quantifying the immediate "return on investment."</p>
+			</div>
 
-				<h3>5.3 Limitations and Future Work</h3>
-				<p><strong>Current Limitations:</strong></p>
-				<ul>
+			<div class="theme-box">
+				<h4 class="lang-zh">主題二：「活動度勝過物質」</h4>
+				<h4 class="lang-en">Theme 2: "Activity Over Material"</h4>
+				<p class="lang-zh">
+					本對局展示了「子力差」與「局面評估」的徹底脫鉤。雖然 Fischer 在物質上處於劣勢，
+					但他的輕子（騎士與主教）達到了理論上的最大活動度。在聲音上，這被轉譯為 Groove 層
+					的密集節奏填充與 Lead 層的連續觸發，形成「少而精」的聲音策略，
+					對比 Byrne「多而癱」的沉重 Foundation。
+				</p>
+				<p class="lang-en">
+					This game demonstrates complete decoupling of "material balance" and "position evaluation." Although Fischer is materially disadvantaged, 
+					his minor pieces (knights and bishops) achieve theoretically maximum activity. Sonically, this translates to dense rhythmic filling in the Groove layer 
+					and continuous triggering in the Lead layer, forming a "less but better" sonic strategy, 
+					contrasting with Byrne's "more but paralyzed" heavy Foundation.
+				</p>
+				<p class="lang-zh"><strong>音樂證據：</strong>棄后後階段（第 18-25 手），Fischer 的 Groove 密度維持在 0.9 以上，
+					而 Byrne 的 Foundation 活動度從 0.7 跌至 0.2，量化了「被動富有」與「主動貧窮」的對比。
+					頻譜分析顯示 Fischer 的聲音能量集中在 2000-5000Hz（明亮、穿透），
+					Byrne 則集中在 100-500Hz（沉悶、受限）。</p>
+				<p class="lang-en"><strong>Musical Evidence:</strong> Post-sacrifice phase (moves 18-25), Fischer's Groove density maintains above 0.9, 
+					while Byrne's Foundation activity drops from 0.7 to 0.2, quantifying the contrast between "passive wealth" and "active poverty." 
+					Spectral analysis shows Fischer's sonic energy concentrated in 2000-5000Hz (bright, penetrating), 
+					while Byrne's focuses on 100-500Hz (dull, restricted).</p>
+			</div>
+
+			<div class="theme-box">
+				<h4 class="lang-zh">主題三：「戰術風暴對比戰略壓力」</h4>
+				<h4 class="lang-en">Theme 3: "Tactical Storm vs. Strategic Pressure"</h4>
+				<p class="lang-zh">
+					不同於 1972 年世界冠軍賽的「無事件性壓力」，本對局呈現極端的「事件密度」。
+					從棄后到悶殺，每一手都是 Lead Event（將軍、威脅、迫移）。在音樂上，
+					這創造了截然不同的敘事風格：不是漸進式的熵值降低，而是持續高熵的即興爆發，
+					如同自由爵士的密集能量釋放。
+				</p>
+				<p class="lang-en">
+					Unlike the "non-event pressure" of the 1972 World Championship, this game presents extreme "event density." 
+					From sacrifice to mate, every move is a Lead Event (check, threat, forced move). Musically, 
+					this creates a dramatically different narrative style: not gradual entropy reduction, but sustained high-entropy improvised explosion, 
+					like the dense energy release of free jazz.
+				</p>
+				<p class="lang-zh"><strong>音樂證據：</strong>Lead 事件頻率在第 17-30 手達到每 2 手 1 次（對比 1972 年賽局的每 5 手 1 次）。
+					Rhythmic Entropy 在整個中局維持在 0.8 以上，顯示高度的節奏不可預測性。
+					這驗證了系統能夠映射兩種極端風格：戰略性的「熵值降低」與戰術性的「熵值維持」。</p>
+				<p class="lang-en"><strong>Musical Evidence:</strong> Lead event frequency during moves 17-30 reaches once every 2 moves (compared to once every 5 moves in the 1972 game). 
+					Rhythmic Entropy maintains above 0.8 throughout the middlegame, showing high rhythmic unpredictability. 
+					This validates the system's ability to map two extreme styles: strategic "entropy reduction" and tactical "entropy maintenance."</p>
+			</div>
+
+			<h3 class="lang-zh">5.2 系統驗證</h3>
+			<h3 class="lang-en">5.2 System Validation</h3>
+			<p class="lang-zh">
+				本案例研究驗證了系統的三個核心能力：
+			</p>
+			<p class="lang-en">
+				This case study validates three core capabilities of the system:
+			</p>
+			<ul class="lang-zh">
+				<li><strong>極端事件動態：</strong>系統能處理極端的參數變化（如棄后造成的 Material Balance 急遽下降），
+					並透過多層級架構的互補機制（Groove 層補償 Lead 層的消失），維持音樂敘事的連貫性。</li>
+				<li><strong>參數解耦：</strong>驗證了「子力差」與「局面評估」可獨立映射的設計理念。
+					Material Balance 的負值與 Position Evaluation 的正向趨勢同時存在，創造出獨特的「矛盾張力」美學。</li>
+				<li><strong>風格多樣性：</strong>相較於 1972 年世界冠軍賽的「戰略壓力」風格，本對局展現「戰術爆發」風格，
+					證明系統能適應不同類型的棋局敘事——從低事件密度的熵值降低，到高事件密度的持續高熵。</li>
+			</ul>
+			<ul class="lang-en">
+				<li><strong>Extreme Event Dynamics:</strong> The system can handle extreme parameter changes (such as Material Balance's drastic drop from queen sacrifice) 
+					and maintain musical narrative coherence through multi-layer complementary mechanisms (Groove layer compensating for Lead layer disappearance).</li>
+				<li><strong>Parameter Decoupling:</strong> Validates the design concept that "material balance" and "position evaluation" can be independently mapped. 
+					Negative Material Balance and positive Position Evaluation trends coexist, creating a unique "contradictory tension" aesthetic.</li>
+				<li><strong>Style Versatility:</strong> Compared to the "strategic pressure" style of the 1972 World Championship, this game exhibits a "tactical explosion" style, 
+					proving the system can adapt to different types of chess narratives—from low event density entropy reduction to high event density sustained high entropy.</li>
+			</ul>
+
+				<h3 class="lang-zh">5.3 限制與未來研究</h3>
+				<h3 class="lang-en">5.3 Limitations and Future Work</h3>
+				<p class="lang-zh"><strong>目前限制：</strong></p>
+				<p class="lang-en"><strong>Current Limitations:</strong></p>
+				<ul class="lang-zh">
 					<li>評估函數簡化：未整合現代引擎（如 Stockfish）的深度評估，可能遺漏複雜戰術細節</li>
 					<li>單一案例限制：需要更多不同風格的對局（戰術型、防禦型）來驗證系統普適性</li>
 					<li>聽覺實證缺失：目前為理論框架與參數分析，未進行實際聽眾的認知實驗</li>
 				</ul>
+				<ul class="lang-en">
+					<li>Simplified evaluation function: Modern engines (e.g., Stockfish) not integrated for deep evaluation, potentially missing complex tactical details</li>
+					<li>Single case limitation: More games of different styles (tactical, defensive) needed to verify system universality</li>
+					<li>Absence of auditory validation: Currently theoretical framework and parameter analysis, lacking actual listener cognitive experiments</li>
+				</ul>
 
-				<p><strong>Future Directions:</strong></p>
-				<ul>
+				<p class="lang-zh"><strong>未來方向：</strong></p>
+				<p class="lang-en"><strong>Future Directions:</strong></p>
+				<ul class="lang-zh">
 					<li>整合 AI 評估引擎，提供更精確的局面評價與複雜度指標</li>
 					<li>擴展至不同文化音樂系統（峇里島 Kotekan、巴爾幹 Aksak 節奏）</li>
 					<li>開發實體感應棋盤，於社交場域（Chess Party）進行使用者研究</li>
 					<li>跨域演出實驗：整合即興饒舌、爵士樂手與行為藝術的現場生成系統</li>
+				</ul>
+				<ul class="lang-en">
+					<li>Integrate AI evaluation engines for more precise position evaluation and complexity metrics</li>
+					<li>Expand to different cultural music systems (Balinese Kotekan, Balkan Aksak rhythms)</li>
+					<li>Develop physical sensor chessboard for user studies in social settings (Chess Party)</li>
+					<li>Cross-domain performance experiments: integrate improvised rap, jazz musicians, and performance art in live generative systems</li>
 				</ul>
 			</div>
 		</section>
 
 		<!-- Conclusion -->
 		<section id="conclusion">
-			<h2>6. Conclusion</h2>
+			<h2 class="lang-zh">6. 結論</h2>
+			<h2 class="lang-en">6. Conclusion</h2>
 			<div class="content">
-				<p>
+				<p class="lang-zh">
 					本研究提出並驗證了一套將西洋棋局轉譯為生成式音樂的理論框架與演算法系統。
 					透過四層聲音角色架構與精確的參數映射機制，系統能將棋局的隱性策略邏輯、心理動態與權力消長，
 					轉化為結構化的音樂敘事。
 				</p>
-				<p>
-					以 Fischer vs. Spassky 1972 年第六局為案例，實證分析展示了系統如何捕捉「無事件性壓力」的累積過程：
-					透過連續型參數（位置評估、子力活動度）的細膩映射，系統在缺乏戰術衝突的中盤階段，
-					仍能建立漸進式的音樂張力。量化分析驗證了音樂層級與棋局動態的相關性，
-					為跨域藝術生成提供了可複製的理論基礎。
+				<p class="lang-en">
+					This research proposes and validates a theoretical framework and algorithmic system for translating chess games into generative music. 
+					Through a four-layer sonic role architecture and precise parameter mapping mechanisms, the system can transform the implicit strategic logic, 
+					psychological dynamics, and power shifts of chess into structured musical narratives.
 				</p>
-				<p>
-					本研究的核心貢獻不僅是技術實現，更是一種<strong>詮釋學工具</strong>（hermeneutic tool）：
-					將無形的博弈邏輯轉化為可感知的藝術形式，讓觀眾/聽眾能透過音樂「聽見」棋局的深層敘事。
+				<p class="lang-zh">
+					以 1956 年「世紀對局」（Byrne vs. Fischer）為案例，實證分析展示了系統如何處理極端的戰術事件與參數突變：
+					透過 Material Balance 與 Position Evaluation 的獨立映射，系統成功捕捉「犧牲作為投資」的邏輯——
+					物質的急遽損失與位置的同步增長，在音樂上形成獨特的「矛盾張力」。
+					四層聲音架構的互補機制（Groove 層補償 Lead 層消失）確保了敘事連貫性。
+					量化分析驗證了高密度戰術事件的音樂轉譯能力，為跨域藝術生成提供了可複製的理論基礎。
+				</p>
+				<p class="lang-en">
+					Using the 1956 "Game of the Century" (Byrne vs. Fischer) as a case study, empirical analysis demonstrates how the system handles extreme tactical events and parameter mutations: 
+					through independent mapping of Material Balance and Position Evaluation, the system successfully captures the logic of "sacrifice as investment"—
+					drastic material loss with simultaneous positional growth creates unique "contradictory tension" musically. 
+					The complementary mechanism of the four-layer architecture (Groove layer compensating for Lead layer disappearance) ensures narrative coherence. 
+					Quantitative analysis validates the musical translation capability of high-density tactical events, providing a reproducible theoretical foundation for cross-domain artistic generation.
+				</p>
+				<p class="lang-zh">
+					本研究的核心貢獻不僅是技術實現，更是一種<strong>詮釋學工具</strong>：
+					將無形的博弈邏輯轉化為可感知的藝術形式，讓觀眾／聽眾能透過音樂「聽見」棋局的深層敘事。
 					這為西洋棋在當代文化中的角色擴展，以及演算法生成藝術的創作實踐，開闢了新的可能性。
 				</p>
-				<p>
+				<p class="lang-en">
+					The core contribution of this research is not only technical implementation, but also a <strong>hermeneutic tool</strong>: 
+					transforming invisible game-theoretic logic into perceptible art forms, allowing audiences/listeners to "hear" the deep narrative of chess through music. 
+					This opens new possibilities for the expansion of chess's role in contemporary culture and the creative practice of algorithmic generative art.
+				</p>
+				<p class="lang-zh">
 					未來，此框架將引導實體裝置開發與跨領域現場演出，最終目標是建立一個棋手、系統與音樂家三方共同參與的、
 					無法完全預測的生成環境，探索古老智力博弈在科技與藝術語境下的全新文化潛力。
+				</p>
+				<p class="lang-en">
+					In the future, this framework will guide physical device development and cross-disciplinary live performances, with the ultimate goal of establishing 
+					an unpredictable generative environment where chess players, the system, and musicians participate together, 
+					exploring the new cultural potential of ancient intellectual games in technological and artistic contexts.
 				</p>
 			</div>
 		</section>
 
 		<!-- References -->
 		<section id="references">
-			<h2>7. References</h2>
+			<h2 class="lang-zh">7. 參考文獻</h2>
+			<h2 class="lang-en">7. References</h2>
 			<div class="content references-list">
 				<ol>
 					<li>
@@ -474,7 +829,7 @@
 						Friberg, A., & Sundström, A. (2002). Swing ratios and ensemble timing in jazz performance: Evidence for a common rhythmic pattern. <em>Music Perception</em>, 19(3), 333-349.
 					</li>
 					<li>
-						Fischer, R. J. (1972). Bobby Fischer: The Greatest Chess Player of All Time [Game collection]. World Chess Championship, Reykjavik.
+						Byrne, D., & Fischer, R. J. (1956). "The Game of the Century" [Chess game]. Rosenwald Memorial Tournament, New York.
 					</li>
 					<li>
 						Roads, C. (2001). <em>Microsound</em>. MIT Press.
@@ -510,11 +865,8 @@
 		</footer>
 	</div>
 
-	<!-- External Libraries - JavaScript (load in order) -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- External Libraries - JavaScript -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.12.1/chess.min.js"></script>
-	<script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
 	
 	<!-- Application Scripts -->
 	<script src="chess-data.js"></script>

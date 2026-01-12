@@ -1,178 +1,31 @@
 // Harmonic Gambit - Main Application Logic
 
-// Global variables
-let board = null;
-let game = null;
-let currentMoveIndex = 0;
-let autoplayInterval = null;
-
-// Move sequence from PGN
-// Fischer vs Spassky 1972 Game 6 - Corrected sequence
-// Note: Original PGN had recording error at move 17 (duplicate Nd7)
-// Move 17 black: Using Rab8 (logical rook maneuver based on position)
-const moveSequence = [
-	"c4", "e6", "Nf3", "d5", "d4", "Nf6", "Nc3", "Be7", "Bg5", "O-O",
-	"e3", "h6", "Bh4", "b6", "cxd5", "Nxd5", "Bxe7", "Qxe7", "Nxd5", "exd5",
-	"Rc1", "Be6", "Qa4", "c5", "Qa3", "Rc8", "Bb5+", "Nd7", "dxc5", "bxc5",
-	"O-O", "Rcb8", "Be2", "Rab8", "Nd4", "Qf8", "Nxe6", "fxe6", "e4", "d4",
-	"f4", "Qe7", "e5", "Rb6", "Bc4", "Kh8", "Qh3", "Nf8", "b3", "a5",
-	"f5", "exf5", "Rxf5", "Nh7", "Rcf1", "Qd8", "Qg3", "Re7", "h4", "Rbb7",
-	"e6", "Rbc7", "Qe5", "Qe8", "a4", "Qd8", "R1f2", "Qe8", "R2f3", "Qd8",
-	"Bd3", "Qe8", "Qe4", "Nf6", "Rxf6", "gxf6", "Rxf6", "Kg8", "Bc4", "Kh8",
-	"Qf4"
-];
+// Language switching function
+function switchLanguage(lang) {
+	// Update body class
+	document.body.className = 'lang-' + lang;
+	
+	// Update button states
+	document.querySelectorAll('.lang-btn').forEach(btn => {
+		btn.classList.remove('active');
+	});
+	document.getElementById('btn-' + lang).classList.add('active');
+	
+	// Update HTML lang attribute
+	document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+	
+	// Save preference to localStorage
+	localStorage.setItem('preferredLanguage', lang);
+}
 
 // Initialize application when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-	initializeChessboard();
-	initializeControls();
+	// Check for saved language preference
+	const savedLang = localStorage.getItem('preferredLanguage') || 'zh';
+	switchLanguage(savedLang);
+	
 	initializeCharts();
 });
-
-// ============================================================
-// CHESS BOARD FUNCTIONS
-// ============================================================
-
-function initializeChessboard() {
-	// Initialize Chess.js game
-	game = new Chess();
-	
-	// Initialize Chessboard.js
-	const config = {
-		draggable: false,
-		position: 'start',
-		pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
-	};
-	
-	board = Chessboard('board', config);
-	updateMoveInfo();
-}
-
-function makeNextMove() {
-	if (currentMoveIndex >= moveSequence.length) {
-		stopAutoplay();
-		return false;
-	}
-	
-	const move = moveSequence[currentMoveIndex];
-	try {
-		// Try to make the move
-		const result = game.move(move);
-		if (result === null) {
-			console.error('====== INVALID MOVE DETECTED ======');
-			console.error('Move:', move, 'at index', currentMoveIndex);
-			console.error('Move number:', Math.ceil((currentMoveIndex + 1) / 2));
-			console.error('Turn:', game.turn() === 'w' ? 'White' : 'Black');
-			console.error('Current FEN:', game.fen());
-			console.error('Legal moves:', game.moves().join(', '));
-			console.error('==================================');
-			
-			// Show error message to user
-			const currentMoveSpan = document.getElementById('currentMove');
-			currentMoveSpan.textContent = `ERROR: Invalid move "${move}" at position ${currentMoveIndex}`;
-			currentMoveSpan.style.color = 'red';
-			
-			stopAutoplay();
-			return false;
-		}
-		board.position(game.fen());
-		currentMoveIndex++;
-		updateMoveInfo();
-		return true;
-	} catch (error) {
-		console.error('Error making move:', move, error);
-		stopAutoplay();
-		return false;
-	}
-}
-
-function makePreviousMove() {
-	if (currentMoveIndex <= 0) {
-		return false;
-	}
-	
-	game.undo();
-	board.position(game.fen());
-	currentMoveIndex--;
-	updateMoveInfo();
-	return true;
-}
-
-function resetToStart() {
-	game.reset();
-	board.position('start');
-	currentMoveIndex = 0;
-	updateMoveInfo();
-	stopAutoplay();
-}
-
-function jumpToEnd() {
-	while (currentMoveIndex < moveSequence.length) {
-		makeNextMove();
-	}
-	stopAutoplay();
-}
-
-function updateMoveInfo() {
-	const moveNumberSpan = document.getElementById('moveNumber');
-	const currentMoveSpan = document.getElementById('currentMove');
-	
-	moveNumberSpan.textContent = currentMoveIndex;
-	
-	if (currentMoveIndex === 0) {
-		currentMoveSpan.textContent = 'Start position';
-	} else if (currentMoveIndex >= moveSequence.length) {
-		currentMoveSpan.textContent = 'Game ended - Fischer wins';
-	} else {
-		const lastMove = moveSequence[currentMoveIndex - 1];
-		const moveNum = Math.ceil(currentMoveIndex / 2);
-		const color = currentMoveIndex % 2 === 1 ? 'White' : 'Black';
-		currentMoveSpan.textContent = `${moveNum}. ${lastMove} (${color})`;
-	}
-}
-
-// ============================================================
-// CONTROL FUNCTIONS
-// ============================================================
-
-function initializeControls() {
-	document.getElementById('startBtn').addEventListener('click', resetToStart);
-	document.getElementById('prevBtn').addEventListener('click', makePreviousMove);
-	document.getElementById('nextBtn').addEventListener('click', makeNextMove);
-	document.getElementById('endBtn').addEventListener('click', jumpToEnd);
-	document.getElementById('autoplayBtn').addEventListener('click', toggleAutoplay);
-}
-
-function toggleAutoplay() {
-	const btn = document.getElementById('autoplayBtn');
-	
-	if (autoplayInterval) {
-		stopAutoplay();
-	} else {
-		startAutoplay();
-	}
-}
-
-function startAutoplay() {
-	const btn = document.getElementById('autoplayBtn');
-	btn.textContent = '⏸ Pause';
-	
-	autoplayInterval = setInterval(() => {
-		const hasNext = makeNextMove();
-		if (!hasNext) {
-			stopAutoplay();
-		}
-	}, 1000); // 1 second per move
-}
-
-function stopAutoplay() {
-	if (autoplayInterval) {
-		clearInterval(autoplayInterval);
-		autoplayInterval = null;
-	}
-	const btn = document.getElementById('autoplayBtn');
-	btn.textContent = '▶️ Autoplay';
-}
 
 // ============================================================
 // CHART INITIALIZATION
@@ -590,5 +443,4 @@ window.addEventListener('scroll', function() {
 });
 
 console.log('Harmonic Gambit application loaded successfully');
-console.log('Total moves:', moveSequence.length);
 console.log('Game statistics:', STATISTICS);
