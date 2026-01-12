@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Debug Chess Moves</title>
+	<style>
+		body {
+			font-family: monospace;
+			padding: 20px;
+			background: #1e1e1e;
+			color: #d4d4d4;
+		}
+		#output {
+			white-space: pre-wrap;
+			background: #252526;
+			padding: 20px;
+			border-radius: 8px;
+			margin-top: 20px;
+		}
+		.error { color: #f48771; }
+		.success { color: #89d185; }
+		.info { color: #4fc1ff; }
+		button {
+			background: #0e639c;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 16px;
+		}
+		button:hover {
+			background: #1177bb;
+		}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.12.1/chess.min.js"></script>
+</head>
+<body>
+	<h1>🐛 Chess Move Sequence Debugger</h1>
+	<p>Testing Fischer vs. Spassky 1972 Game 6 move sequence...</p>
+	<button onclick="testMoves()">Run Test</button>
+	<div id="output"></div>
+
+	<script>
+		const moveSequence = [
+			"c4", "e6", "Nf3", "d5", "d4", "Nf6", "Nc3", "Be7", "Bg5", "O-O",
+			"e3", "h6", "Bh4", "b6", "cxd5", "Nxd5", "Bxe7", "Qxe7", "Nxd5", "exd5",
+			"Rc1", "Be6", "Qa4", "c5", "Qa3", "Rc8", "Bb5+", "Nd7", "dxc5", "bxc5",
+			"O-O", "Rcb8", "Be2"
+		];
+
+		function testMoves() {
+			const output = document.getElementById('output');
+			output.innerHTML = '';
+			
+			const game = new Chess();
+			let log = '';
+
+			log += '<span class="info">Starting position test...</span>\n\n';
+
+			for (let i = 0; i < moveSequence.length; i++) {
+				const move = moveSequence[i];
+				const moveNum = Math.ceil((i + 1) / 2);
+				const turn = game.turn() === 'w' ? 'White' : 'Black';
+				
+				const result = game.move(move);
+				
+				if (result === null) {
+					log += `<span class="error">❌ ERROR at index ${i}</span>\n`;
+					log += `   Move: ${move}\n`;
+					log += `   Game move: ${moveNum}. ${turn}\n`;
+					log += `   Turn: ${turn}\n\n`;
+					log += `   <span class="info">Current FEN:</span>\n   ${game.fen()}\n\n`;
+					log += `   <span class="success">Legal moves:</span>\n   ${game.moves().join(', ')}\n\n`;
+					log += `   <span class="info">Piece on d7:</span> ${game.get('d7') ? game.get('d7').type + game.get('d7').color : 'empty'}\n`;
+					log += `   <span class="info">Piece on e6:</span> ${game.get('e6') ? game.get('e6').type + game.get('e6').color : 'empty'}\n`;
+					break;
+				} else {
+					log += `<span class="success">✓ ${i}: ${moveNum}. ${move} (${turn})</span>\n`;
+				}
+			}
+
+			if (moveSequence.every((move, i) => {
+				const testGame = new Chess();
+				for (let j = 0; j <= i; j++) {
+					if (testGame.move(moveSequence[j]) === null) return false;
+				}
+				return true;
+			})) {
+				log += '\n<span class="success">🎉 All moves are valid!</span>\n';
+			} else {
+				log += '\n<span class="error">⚠️ Sequence contains invalid moves</span>\n';
+				log += '\n<span class="info">Suggested fixes:</span>\n';
+				log += '1. Check if move 17 black should be a different move\n';
+				log += '2. Verify the position after move 16\n';
+				log += '3. Cross-reference with official game records\n';
+			}
+
+			output.innerHTML = log;
+		}
+
+		// Auto-run on load
+		window.onload = testMoves;
+	</script>
+</body>
+</html>
