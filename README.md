@@ -32,7 +32,7 @@ This project presents a novel algorithmic framework that translates the strategi
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/Harmonic-Gambit.git
+git clone https://github.com/kurostanley/Harmonic-Gambit.git
 cd Harmonic-Gambit
 ```
 
@@ -70,7 +70,7 @@ git add .
 git commit -m "Initial commit: Harmonic Gambit research paper"
 
 # Add remote repository
-git remote add origin https://github.com/YOUR_USERNAME/Harmonic-Gambit.git
+git remote add origin https://github.com/kurostanley/Harmonic-Gambit.git
 
 # Push to GitHub
 git push -u origin main
@@ -134,16 +134,6 @@ Harmonic-Gambit/
 - **Quantitative Analysis**: Statistical correlation (r = -0.78, p < 0.01)
 - **Narrative Themes**: "Genius Chooses Discipline", "Power from Option Control"
 
-## 📖 Citation
-
-If you use this framework in your research, please cite:
-
-```
-Harmonic Gambit: A Theoretical Framework and Narrative Interpretation 
-of Chess-Driven Generative Music (2026)
-Available at: https://YOUR_USERNAME.github.io/Harmonic-Gambit/
-```
-
 ## 🛠️ Future Enhancements
 
 - [ ] Integrate real-time audio synthesis using Web Audio API
@@ -156,12 +146,6 @@ Available at: https://YOUR_USERNAME.github.io/Harmonic-Gambit/
 ## 📝 License
 
 This project is open source and available for educational and research purposes.
-
-## 👥 Contact
-
-For questions or collaborations:
-- GitHub Issues: [Report issues here]
-- Project Website: [Your website]
 
 ## 🙏 Acknowledgments
 
